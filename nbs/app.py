@@ -1,11 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# ## Imports
-
-# In[7]:
-
-
 import streamlit as st
 from PIL import Image
 import os
@@ -19,29 +11,28 @@ def main():
     image = Image.open('../assets/Box_Office.jfif')
     st.image(image, use_column_width=False)
 
-
+    #quick sidebar
     add_selectbox = st.sidebar.selectbox('How would you like to predict?', ('Online', 'test'))
     st.sidebar.info('This app is created to predict revenue for movies' )
     st.sidebar.success('DAT158')
     st.title('Box Office Predictions')
     
-
+    #Create questions that can be filled in
     if add_selectbox == 'Online': 
+        #Get the data
         budget = st.number_input('budget', min_value=0, max_value=1000000000, value=1000000)
         popularity = st.number_input('popularity', min_value=0., max_value=100., value=0., format="%.2f", step=1.)
         runtime = st.number_input('runtime', min_value=0., max_value=500., value=0., format="%.2f", step=1.)
         
         inputs = [[budget,runtime,popularity]]
-
+        
+        #Predict revenue based on inputs
         if st.button('Predict'): 
             result = model.predict(inputs)
             #format_result = "{:.2f}".format(float(result))
             print(result)
             st.success('Predicted output: €{:,.2f}'.format(float(result)))
-            
         
-        
-
 #Start application
 if __name__ =='__main__':
   main()
