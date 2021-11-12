@@ -6,9 +6,6 @@
 # In[7]:
 
 
-import pandas as pd 
-import numpy as np
-from sklearn.preprocessing import StandardScaler
 import streamlit as st
 from PIL import Image
 import os
@@ -35,7 +32,6 @@ def main():
         runtime = st.number_input('runtime', min_value=0., max_value=500., value=0., format="%.2f", step=1.)
         
         inputs = [[budget,runtime,popularity]]
-        inputs_scaled = StandardScaler().fit_transform(inputs)
 
         if st.button('Predict'): 
             result = model.predict(inputs)
